@@ -26,4 +26,5 @@ Route.get('/', async () => {
 
 Route.group(() => {
     Route.resource('posts', 'PostsController')
+    Route.put('posts/trashed/:id', 'PostsController.trashed')
 }).prefix('/api')

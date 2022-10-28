@@ -9,14 +9,15 @@ export default class PostsController
     {
         try
         {
-            const page  = request.input("page", 1);
-            const limit = request.input("limit", 1);
+            const page  = request.input('page', 1)
+            const limit = request.input('limit', 10)
+            const status = request.input('status', false)
             
-            const posts = await Post.query().paginate(page, limit)
+            const posts = await Post.query().withScopes((scopes) => scopes.statusPosts(status)).paginate(page, limit)
             return response.status(200).json({
                 data: posts,
                 response: 200
-            })    
+            })
         }
         catch (error)
         {
@@ -104,6 +105,28 @@ export default class PostsController
 
             return response.status(200).json({
                 message: 'Post deleted',
+                response: 200
+            })
+        }
+        catch (error)
+        {
+            return response.status(500).json({
+                message: error.message,
+                response: 500
+            })
+        }
+    }
+
+    public async trashed({params, response}: HttpContextContract)
+    {
+        try
+        {
+            const { id } = params
+            const post = await Post.findOrFail(id)
+            await post.merge({status: 'Trashed'}).save()
+
+            return response.status(200).json({
+                data: post,
                 response: 200
             })
         }

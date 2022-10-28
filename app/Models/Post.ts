@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, scope  } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Post extends BaseModel
 {
@@ -25,4 +25,10 @@ export default class Post extends BaseModel
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  public static statusPosts = scope((query, search) => {
+    if (search) {
+      query.where('status', search)
+    }
+  })
 }
