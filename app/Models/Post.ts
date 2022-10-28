@@ -15,6 +15,9 @@ export default class Post extends BaseModel
   public content: string;
 
   @column()
+  public category: string;
+
+  @column()
   public status: string;
 
   @column.dateTime({ autoCreate: true })
