@@ -24,7 +24,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/posts?page=1&limit=10",
+					"raw": "{{url}}/api/posts?page=1&limit=10&status=",
 					"host": [
 						"{{url}}"
 					],
@@ -40,6 +40,10 @@
 						{
 							"key": "limit",
 							"value": "10"
+						},
+						{
+							"key": "status",
+							"value": ""
 						}
 					]
 				}
@@ -155,6 +159,35 @@
 						"api",
 						"posts",
 						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts/trashed/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/trashed/7",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"trashed",
+						"7"
 					]
 				}
 			},
